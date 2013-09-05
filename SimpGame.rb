@@ -10,6 +10,8 @@ class Card
 	
 end
 
+##need a subclass for type of card to avoid code block duplication? 
+
 class Player
 	attr_reader :name
 	

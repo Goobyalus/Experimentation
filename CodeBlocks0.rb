@@ -50,6 +50,7 @@ param_block(){|a,b,c| puts "#{a}, #{b}, #{c}"}
 
 #code block with variable # or param
 	#Proc.arity --> # param
+#note - &varname means look for code block
 '''
 def vararg_block(&block)
 	case block.arity
@@ -76,3 +77,4 @@ vararg_block(){|a,b,c| puts "#{a}, #{b}, #{c}"}
 
 
 
+#TODO - multiple code blocks?

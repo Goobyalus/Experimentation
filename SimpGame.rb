@@ -1,11 +1,20 @@
 
 class Card
-	attr_reader :name, :text, :actions
+	attr_reader :name, :text, :actions, :cost, :is_treasure, :is_victory, \
+		:is_action, :is_reaction
 	
-	def initialize(name, text = nil, actions = nil)
+	def initialize(name, text = nil, actions = nil, cost = 0,
+		is_treasure = false, is_victory = false, is_action = false, 
+		is_reaction = false)
+		
 		@name = name
 		@text = text
 		@actions = actions
+		@cost = cost
+		@is_treasure = treasure
+		@is_victory = victory
+		@is_action = is_action
+		@is_reaction = is_reaction
 	end
 	
 end
@@ -13,12 +22,13 @@ end
 ##need a subclass for type of card to avoid code block duplication? 
 
 class Player
-	attr_reader :name
+	attr_reader :name, :kingdom, :hand, :library, :discard, :action
 	
 	def initialize(player_name)
 		raise ArgumentError, 'Name should be a String' \
 			unless player_name.is_a? String
 		@name = player_name
+		@kingdom = Array.new(7,Card.new(copper))
 	end
 	
 	def to_s()

@@ -1,6 +1,6 @@
 
 class Card
-	attr_accessor :name, :text, :actions
+	attr_reader :name, :text, :actions
 	
 	def initialize(name, text = nil, actions = nil)
 		@name = name
@@ -11,16 +11,22 @@ class Card
 end
 
 class Player
-	attr_accessor :name
+	attr_reader :name
 	
 	def initialize(player_name)
+		raise ArgumentError, 'Name should be a String' \
+			unless player_name.is_a? String
 		@name = player_name
+	end
+	
+	def to_s()
+		@name
 	end
 	
 end
 
 class Game
-	attr_accessor :players, :supplies, :turn, :restrictions, :curr_player
+	attr_reader :players, :supplies, :turn, :restrictions, :curr_player
 	
 	def initialize()
 		@players = Array.new
@@ -47,4 +53,8 @@ class Game
 	
 end
 
-
+game = Game.new()
+game.add_player("Goob")
+game.add_player("Gira")
+puts game.players
+game.add_player(1)

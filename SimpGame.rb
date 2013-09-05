@@ -45,6 +45,6 @@ class Game
 		turn += 1
 	end
 	
-	
-	
 end
+
+

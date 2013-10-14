@@ -1,4 +1,9 @@
 
+
+class CardClassFactory
+	
+end
+
 class Card
 	attr_reader :name, :text, :actions
 	

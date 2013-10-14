@@ -1,0 +1,21 @@
+<root>
+
+<card name="Village" type="action" cost="3">	
+	<action>+1 card</action>
+	<action>+2 actions</action>
+</card>
+
+<card name="Chapel" type="action" cost="2">
+	<action>Choice n {0,1,2,3,4}</action>
+	<action>Trash n cards</action>
+</card>
+
+<card name="Estate" type="victory" cost="2">
+	<points> 1 </points>
+</card>
+
+<card name="Copper" type="treasure" cost="0">
+	<value> 1 </value>
+</card>
+
+</root>

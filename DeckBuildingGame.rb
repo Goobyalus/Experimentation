@@ -7,8 +7,8 @@
 #The "proper" way to shuffle; thanks to Dr. Kruskal.
 #	note possibility of error if arr does not have a length
 def shuffle(arr, len = arr.length)
-	len = len -1
-	while (len > = 0) do
+
+	while ((len=len-1) >= 0) do
 		i = rand(len)
 		arr[len], arr[i] = arr[i],arr[len]
 	end
@@ -18,19 +18,23 @@ end
 #	In the future, the game should act as a server, serving players' requests.
 #	For now, the game is not distributed.
 class Game
-	attr_reader :players, :supplies, :trash, :turn, :phase
+	attr_reader :players, :supplies, :phases, :trash, :turn, :phase
 	
 	#the game should recognize two turn phases - :action and :buy
 	
-	def initialize(supplies, players)
+	def initialize(supplies, players, phases)
 		@supplies = supplies
 		@players = players
+		@phases = phases
+		@trash = Array.new
+		@turn = 0
+		@phase = 0
 	end
 	
 	def score(player)
 		sum = 0
 		
-		player.deck.each{|card| sum = sum + card.points_proc}
+		player.deck.each{|card| sum = sum + card.points_proc.call}
 		#TODO: Card.points()
 		#note about infinite recursion and efficiency depending on code in card.points
 		#
@@ -104,7 +108,7 @@ class Player
 	
 	#discard everything; draw new hand
 	#NOTE: it is game's responsibility to check for triggers beforehand
-	#	Q: use exception handling instead?
+	#	Q: use exception handling instead? Have trigger code in card?
 	def end_turn
 		
 		@discard_pile.concat(@play_area.pop(@play_area.length))

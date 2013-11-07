@@ -14,6 +14,8 @@ def shuffle(arr, len = arr.length)
 	end
 end
 
+
+
 #Defines instances of deck building games
 #	In the future, the game should act as a server, serving players' requests.
 #	For now, the game is not distributed.
@@ -41,7 +43,9 @@ class Game
 	end
 	
 	def to_s
-		"#{players}, #{turn}, #{phase}\n#{supplies}\n#{trash}\n"
+		plyr_str = ""
+		players.each{|p| plyr_str = plyr_str + p.to_s + "\n"}
+		"Players:\n#{plyr_str}\nTurn: #{turn}, Phase: #{phases[phase]}\nSupplies: #{supplies}\nTrash: #{trash}\n"
 	end
 end
 
@@ -58,6 +62,10 @@ class Supply
 		@card_class = card_class
 		@cards = Array.new(num_cards){card_class.new}
 	end
+	
+	def to_s
+		"#{@card_class}, #{cards.length}"
+	end
 end
 
 
@@ -65,7 +73,8 @@ end
 
 #Defines instances of players in a deck building game
 class Player
-	attr_reader :name, :deck, :hand, :hand_size, :play_area, :discard_pile
+	attr_reader :name, :deck, :hand, :hand_size, :play_area, :discard_pile,\
+		:actions, :money, :buys #Q: maintain in Game instead?
 	
 	def initialize(name, deck, hand_size = 5)
 		@name = name
@@ -74,6 +83,9 @@ class Player
 		@hand_size = hand_size
 		@play_area = Array.new
 		@discard_pile = Array.new
+		@actions = 0
+		@money = 0
+		@buys = 0
 	end
 	
 	#returns played card for game to execute
@@ -89,13 +101,11 @@ class Player
 	end
 	
 	
-	
 	def draw(n)
 		if @deck.empty? then shuffle_discard end
 		if @deck.length < n then n = @deck.length end
 		@hand.concat(@deck.pop(n))
 	end
-	
 	
 	
 	def shuffle_discard
@@ -105,22 +115,25 @@ class Player
 	end
 	
 	
-	
 	#discard everything; draw new hand
 	#NOTE: it is game's responsibility to check for triggers beforehand
 	#	Q: use exception handling instead? Have trigger code in card?
+	#		card gets pointer to game, then calls execute with card code block?
 	def end_turn
 		
 		@discard_pile.concat(@play_area.pop(@play_area.length))
-		#TODO: check other zones
-		@discard_pile.@concat(@hand.pop(@hand.length))
+		#TODO: check other zones, durations
+		@discard_pile.concat(@hand.pop(@hand.length))
 		
 		draw(@hand_size)
 		nil
 	end
 	
+	def to_s
+		"Name: #{@name}\nHand: #{@hand}"
+	end
+	
 end
-
 
 
 

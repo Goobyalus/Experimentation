@@ -18,7 +18,7 @@ puts game.to_s
 
 
 #user interaction
-
+begin
 	#select players
 
 	#select cards from database
@@ -26,6 +26,7 @@ puts game.to_s
 	#initialize game
 	
 	#tally win/loss
+end until game.game_over or ((input = gets.chomp) == "exit") 
 
 #goodbye
 

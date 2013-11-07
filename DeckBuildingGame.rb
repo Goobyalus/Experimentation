@@ -21,8 +21,10 @@ end
 #	For now, the game is not distributed.
 class Game
 	attr_reader :players, :supplies, :phases, :trash, :turn, :phase
+	attr_accessor :game_over
 	
-	#the game should recognize two turn phases - :action and :buy
+	#TODO: endgame conditions
+	
 	
 	def initialize(supplies, players, phases)
 		@supplies = supplies
@@ -44,9 +46,10 @@ class Game
 	
 	def to_s
 		plyr_str = ""
-		players.each{|p| plyr_str = plyr_str + p.to_s + "\n"}
+		players.each{|p| plyr_str = plyr_str + p.to_s + "\n\n"}
 		"Players:\n#{plyr_str}\nTurn: #{turn}, Phase: #{phases[phase]}\nSupplies: #{supplies}\nTrash: #{trash}\n"
 	end
+			
 end
 
 

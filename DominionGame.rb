@@ -2,10 +2,7 @@ require "./DeckBuildingGame"
 
 
 class DominionGame < Game
-
-
-
-	def over?
+		def over?
 		empty_count = 0
 		
 		@supplies.each{|supply|

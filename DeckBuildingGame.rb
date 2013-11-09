@@ -38,7 +38,7 @@ class Game
 	def score(player)
 		sum = 0
 		
-		player.deck.each{|card| sum = sum + card.points_proc.call}
+		players[player].deck.each{|card| sum = sum + card.points_proc.call}
 		temp = player.point_tokens
 		if(temp != null) then sum += temp end
 		#TODO: Card.points()

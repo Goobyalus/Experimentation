@@ -11,6 +11,11 @@ class Card
 		@action_attributes = event_attributes
 	end
 	
+	#TODO need to deal with points' arguments
+	def points(
+		if end
+	end
+	
 	def to_s
 		self.class
 	end

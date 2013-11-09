@@ -39,10 +39,13 @@ class Game
 		sum = 0
 		
 		player.deck.each{|card| sum = sum + card.points_proc.call}
+		temp = player.point_tokens
+		if(temp != null) then sum += temp end
 		#TODO: Card.points()
 		#note about infinite recursion and efficiency depending on code in card.points
 		#
 	end
+	
 	
 	def to_s
 		plyr_str = ""
@@ -64,6 +67,18 @@ class Supply
 	def initialize(card_class, num_cards = 10)
 		@card_class = card_class
 		@cards = Array.new(num_cards){card_class.new}
+	end
+	
+	def name
+		card_class.class.to_s
+	end
+	
+	def game_ending?
+		card_class.game_ending?
+	end
+	
+	def empty?
+		cards.length == 0
 	end
 	
 	def to_s

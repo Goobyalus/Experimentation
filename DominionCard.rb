@@ -1,9 +1,12 @@
 #Q: Want class of card classes?
+#TODO: instances are virtually meaningless here - do away with subclasses or
+#	update to use class variables.
 
 
 class Card
 	@@game_ending = false	#whether empty supply will end game
 
+	#TODO: these parameters are badly named
 	attr_reader :static_attributes, :event_attributes
 	
 	def initialize(static_attributes, event_attributes) 
@@ -12,8 +15,17 @@ class Card
 	end
 	
 	#TODO need to deal with points' arguments
-	def points(
-		if end
+	def points(game = nil)
+		temp = event_attributes[points]
+		if(temp == nil) then return 0 end
+		
+		#note: does not deal with non-integer numbers - check numeric of fixnum
+		if temp.is_a?(Integer) then return temp end
+		
+		#code for point checking must come from subclass
+		if temp.is_a?(Proc) then return temp.call(game) end
+		
+		return 0
 	end
 	
 	def to_s
@@ -69,3 +81,8 @@ class Village < Card
 	end
 end
 
+class Curse < Card
+	def initialize
+		super({:cost => 0, :curse => true}, {:points => -1})
+	end
+end

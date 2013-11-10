@@ -53,6 +53,27 @@ module Tests
 	end
 	module_function :score_more
 
+	def score_garden
+		game = DominionGame.new([Supply.new(Copper), Supply.new(Village), Supply.new(Province,1)],
+					[Player.new("One",
+						Array.new(7,Copper.new)
+						.concat(Array.new(3,Gardens.new))
+						.concat(Array.new(9,Estate.new))
+						),
+					 Player.new("Two",
+						Array.new(7,Copper.new)
+						.concat(Array.new(1,Gardens.new))
+						.concat(Array.new(12,Estate.new))
+						)
+					],
+					[:action, :buy])
+				
+		if game.score(0) != 12 then return false end
+		if game.score(1) != 14 then return false end
+		return true
+	end
+	module_function :score_garden
+	
 	def play_treasure
 		#TODO
 		:unimplemented

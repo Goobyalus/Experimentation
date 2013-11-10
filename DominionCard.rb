@@ -9,21 +9,21 @@ class Card
 	#TODO: these parameters are badly named
 	attr_reader :static_attributes, :event_attributes
 	
-	def initialize(static_attributes, event_attributes) 
+	def initialize(static_attributes = {}, event_attributes = {}) 
 		@static_attributes = static_attributes
 		@event_attributes = event_attributes
 	end
 	
-	#TODO need to deal with points' arguments
-	def points(game = nil)
+	def points(game = nil, p_index = nil)
 		temp = event_attributes[:points]
 		if(temp == nil) then return 0 end
 		
 		#note: does not deal with non-integer numbers - check numeric of fixnum
 		if temp.is_a?(Integer) then return temp end
 		
-		#code for point checking must come from subclass
-		if temp.is_a?(Proc) then return temp.call(game) end
+		#code for point checking must come from subclass or init.
+		#todo use variable args
+		if temp.is_a?(Proc) then return temp.call(game, p_index) end
 		
 		return 0
 	end
@@ -72,6 +72,16 @@ class Province < Card
 	
 	def initialize
 		super({:cost => 8, :victory => true}, {:points => 6})
+	end
+end
+
+class Gardens < Card
+	
+	def initialize
+		super({:cost => 4, :victory => true},
+			{:points => Proc.new{|game,p_index|
+				game.players[p_index].deck.length/10
+			}})
 	end
 end
 

@@ -40,7 +40,7 @@ class Game
 	def score(player)
 		sum = 0
 		
-		players[player].deck.each{|card| sum = sum + card.points(self)}
+		players[player].deck.each{|card| sum = sum + card.points(self,player)}
 		begin
 			temp = player.point_tokens
 		rescue

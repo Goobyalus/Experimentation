@@ -11,12 +11,12 @@ class Card
 	
 	def initialize(static_attributes, event_attributes) 
 		@static_attributes = static_attributes
-		@action_attributes = event_attributes
+		@event_attributes = event_attributes
 	end
 	
 	#TODO need to deal with points' arguments
 	def points(game = nil)
-		temp = event_attributes[points]
+		temp = event_attributes[:points]
 		if(temp == nil) then return 0 end
 		
 		#note: does not deal with non-integer numbers - check numeric of fixnum
@@ -29,7 +29,7 @@ class Card
 	end
 	
 	def to_s
-		self.class
+		self.class.to_s
 	end
 	
 	def self.game_ending?

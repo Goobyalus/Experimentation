@@ -35,12 +35,18 @@ class Game
 		@phase = 0
 	end
 	
+	
+	#TODO - smart method = sort into bags, calculate each, multiply each
 	def score(player)
 		sum = 0
 		
-		players[player].deck.each{|card| sum = sum + card.points_proc.call}
-		temp = player.point_tokens
-		if(temp != null) then sum += temp end
+		players[player].deck.each{|card| sum = sum + card.points(self)}
+		begin
+			temp = player.point_tokens
+		rescue
+			temp = 0
+		end
+		if(temp != nil) then sum += temp end
 		#TODO: Card.points()
 		#note about infinite recursion and efficiency depending on code in card.points
 		#

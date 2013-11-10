@@ -32,6 +32,26 @@ module Tests
 		return true
 	end
 	module_function :simple_score
+	
+	def score_more
+		game = DominionGame.new([Supply.new(Copper), Supply.new(Village), Supply.new(Province,1)],
+					[Player.new("One",
+						Array.new(7,Copper.new)
+						.concat(Array.new(3,Duchy.new))
+						.concat(Array.new(10,Curse.new))
+						),
+					 Player.new("Two",
+						Array.new(7,Copper.new)
+						.concat(Array.new(1,Province.new))
+						.concat(Array.new(1,Estate.new))
+						)
+					],
+					[:action, :buy])
+		if game.score(0) != -1 then return false end
+		if game.score(1) != 7 then return false end
+		return true
+	end
+	module_function :score_more
 
 	def play_treasure
 		#TODO

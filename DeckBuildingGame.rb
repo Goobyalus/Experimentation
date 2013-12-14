@@ -15,7 +15,6 @@ def shuffle(arr, len = arr.length)
 end
 
 
-
 #Defines instances of deck building games
 #	In the future, the game should act as a server, serving players' requests.
 #	For now, the game is not distributed.

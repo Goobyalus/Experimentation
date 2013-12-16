@@ -1,9 +1,6 @@
-#require 'io'
+require 'yaml'
 
-#http://ruby-doc.org/core-2.0.0/Marshal.html
-=begin
-Some objects cannot be dumped: if the objects to be dumped include bindings, procedure or method objects, instances of class IO, or singleton objects, a TypeError will be raised.
-=end
+
 
 
 class Potato
@@ -25,12 +22,12 @@ class Potato
 end
 
 a = [1,2,3,4,5,6,7,8,9]
-f = File.open("MarshalData.data","w")
-data = Marshal.dump(a)
+f = File.open("YAMLData.data","w")
+data = YAML.dump(a)
 #puts data
 
 begin
-	IO.binwrite("MarshalData.data",data)
+	IO.binwrite("YAMLData.data",data)
 rescue Exception => e
 	puts  e.message
 end
@@ -39,8 +36,8 @@ f.close
 
 #write a class to file
 
-f = File.open("MarshalData2.data","w")
-data = Marshal.dump(Potato)
+f = File.open("YAMLData2.data","w")
+data = YAML.dump(Potato)
 
 begin
 	IO.binwrite(f,data)

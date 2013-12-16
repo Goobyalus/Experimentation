@@ -21,13 +21,16 @@ class Potato
 end
 
 a = [1,2,3,4,5,6,7,8,9]
-temp = File.open("MarshalData.data","w")
+File.open("MarshalData.data","w")
 data = Marshal.dump(a)# Marshal.dump(Potato)				#bitstream of Potato class
 puts data
+
+
+
 begin
-	#IO.binwrite("MarshalData.data")
-	IO.copy_stream(data,temp)
+	IO.binwrite("MarshalData.data",data)
 rescue Exception => e
 	puts  e.message
 end
+
 

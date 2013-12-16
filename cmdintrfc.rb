@@ -4,6 +4,7 @@
 class Shell
 	@@commands = {
 		"listcmd" => :listcmd,
+		"listobj" => :listobj,
 		"hello" => :hello,
 		"mkobj" => :mkobj,
 		"rmobj" => :rmobj
@@ -21,9 +22,14 @@ class Shell
 	end
 	
 	
-	def listcmd()
+	def listcmd(args)
 		puts
 		puts @@commands.keys.sort
+	end
+	
+	def listobj(args)
+		puts
+		puts @@objects
 	end
 	
 	def hello()
@@ -31,11 +37,14 @@ class Shell
 		puts "hello"
 	end
 	
-	def mkobj(objname, obj)
+	def mkobj(args)
+		objname = args[0]
+		obj = args[1]
 		if not objname.is_a?(String) then raise "name must be string" end
 		if @@objects[objname] != nil then raise "object already mapped" end
 		
-		puts "UNIMPLEMENTED"
+		@@objects[objname] = eval(obj)
+		#puts "UNIMPLEMENTED"
 	end
 	
 	def rmobj
@@ -58,7 +67,7 @@ begin
 	print "> "
 	buffer = gets.chomp.split(/\s/)
 	
-	shell.send(shell.commands[buffer[0]])
+	shell.send(shell.commands[buffer[0]], buffer[1..buffer.length])#length-1 would be mroe correct
 	
 	
 

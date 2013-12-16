@@ -18,14 +18,16 @@ class Potato
 	def potato_stats
 		"name: #{name}, weight: #{weight}, quality: #{quality}"
 	end
+	
+	def to_s
+		"I am a member of the Potato class"
+	end
 end
 
 a = [1,2,3,4,5,6,7,8,9]
-File.open("MarshalData.data","w")
-data = Marshal.dump(a)# Marshal.dump(Potato)				#bitstream of Potato class
-puts data
-
-
+f = File.open("MarshalData.data","w")
+data = Marshal.dump(a)
+#puts data
 
 begin
 	IO.binwrite("MarshalData.data",data)
@@ -33,4 +35,15 @@ rescue Exception => e
 	puts  e.message
 end
 
+f.close
 
+#write a class to file
+
+f = File.open("MarshalData2.data","w")
+data = Marshal.dump(Potato)
+
+begin
+	IO.binwrite(f,data)
+rescue Exception => e
+	puts e.message
+end

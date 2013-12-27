@@ -14,6 +14,11 @@ def shuffle(arr, len = arr.length)
 	end
 end
 
+ERRORS = {
+	:Illegal_Play => "Illegal play",
+	:Invalid_Choice => "Invalid card choice"
+}
+
 
 #Defines instances of deck building games
 #	In the future, the game should act as a server, serving players' requests.
@@ -51,6 +56,32 @@ class Game
 		#
 	end
 	
+	#
+	def legal_play?(player, card)
+		
+	end
+	
+	#Checks oob
+	#Checks legal play
+	#Has player play card
+	#Executes card
+	def play_card(player, card_index)
+	
+		if(card_index >= @hand.length) then raise ERRORS[:Invalid_Choice] end
+		
+		card = player.hand[card_index]
+		
+		if(not legal_play?(player, card) then raise ERRORS[:IllegalPlay] end
+		
+		player.play_card(card_index)
+		execute_card(player, card)
+	end
+	
+	#executes the effect of card played by player
+	def execute_card(player, card)
+		#TODO
+		raise "UNIMPLEMENTED"		
+	end
 	
 	def to_s
 		plyr_str = ""
@@ -111,20 +142,22 @@ class Player
 		@buys = 0
 	end
 	
-	#returns played card for game to execute
+	#moves card from hand into play_area
 	def play_card(card_index)
 	
 		if(card_index >= @hand.length) then raise "invalid choice (oob)" end
-		
-		temp = @hand.delete_at(card_index)
-		@play_area.push(temp)
-		
-		temp
-		
+			
+		#error checking - done by game
+		@play_area.push(@hand.delete_at(card_index))
+						
 	end
 	
 	
+	
+	
+	
 	def draw(n)
+		#TODO: shuffle discard if n > (deck size + discard size)
 		if @deck.empty? then shuffle_discard end
 		if @deck.length < n then n = @deck.length end
 		@hand.concat(@deck.pop(n))

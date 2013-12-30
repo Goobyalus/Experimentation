@@ -87,10 +87,12 @@ module Tests
 					))
 				] #phases are default
 			)
-		#:unimplemented
-		true
+		
+		game.players.each{|p| p.draw}
+		:unimplemented
+		#true
 	end
-	module_function :play_treasure
+	module_function :setup_game
 	
 	def play_treasure
 		#TODO

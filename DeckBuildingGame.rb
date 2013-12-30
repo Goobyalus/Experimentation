@@ -156,7 +156,7 @@ class Player
 	
 	
 	
-	def draw(n)
+	def draw(n=5)
 		#TODO: shuffle discard if n > (deck size + discard size)
 		if @deck.empty? then shuffle_discard end
 		if @deck.length < n then n = @deck.length end

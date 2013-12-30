@@ -92,19 +92,32 @@ module Tests
 			p.shuffle_deck
 			p.draw
 		}
-		game.players.each{|p| 
-			puts p.hand
-			puts
-		}
+
 		game.players.each{|p|
 			if(p.hand.size != 5) or (p.deck.size != 5) then return false end
 		}
-		true
+		return game
 		#note: inspect hands to see if shuffling is occurring
 	end
 	module_function :setup_game_manually
 	
+	
+	def dominion_initializer
+		g = DominionGame.new
+	end
+	module_function :dominion_initializer
+	
+	def setup_game
+		#game = DominionGame.new
+		#game.setup
+		
+		:unimplemented
+	end
+	module_function :setup_game
+	
 	def play_treasure
+		
+	
 		#TODO
 		:unimplemented
 	end
@@ -133,13 +146,14 @@ end#MODULE
 
 def test_all
 	(Tests.public_methods(false) - Module.methods).each{|test|
-		puts test
+		puts "____________________________#{test}_____________________________"
 		begin
 			puts Tests.send(test)
 		rescue Exception => e
 			puts e.message
 			puts e.backtrace
 		end
+		puts
 		puts
 	}
 end

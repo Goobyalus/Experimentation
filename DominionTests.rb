@@ -84,9 +84,9 @@ module Tests
 				Player.new("Two",
 					Array.new(7,Copper.new)
 					.concat(Array.new(3,Estate.new)
-					)
+					))
 				] #phases are default
-			))
+			)
 		#:unimplemented
 		true
 	end

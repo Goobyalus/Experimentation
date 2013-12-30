@@ -2,6 +2,11 @@ require "./DeckBuildingGame"
 
 
 class DominionGame < Game
+
+	def initialize(supplies, players, phases = [:action, :buy, :cleanup])
+		super(supplies, players, phases)
+	end
+
 	def over?
 		empty_count = 0
 		

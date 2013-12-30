@@ -74,6 +74,24 @@ module Tests
 	end
 	module_function :score_garden
 	
+	def setup_game
+		
+		game = DominionGame.new([Supply.new(Province,1)],
+				[Player.new("One",
+					Array.new(7,Copper.new)
+					.concat(Array.new(3,Estate.new)
+					),
+				Player.new("Two",
+					Array.new(7,Copper.new)
+					.concat(Array.new(3,Estate.new)
+					)
+				] #phases are default
+			)
+		#:unimplemented
+		true
+	end
+	module_function :play_treasure
+	
 	def play_treasure
 		#TODO
 		:unimplemented

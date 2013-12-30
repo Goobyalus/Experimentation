@@ -71,7 +71,7 @@ class Game
 		
 		card = player.hand[card_index]
 		
-		if(not legal_play?(player, card) then raise ERRORS[:IllegalPlay] end
+		if(not legal_play?(player, card)) then raise ERRORS[:IllegalPlay] end
 		
 		player.play_card(card_index)
 		execute_card(player, card)

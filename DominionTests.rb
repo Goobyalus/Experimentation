@@ -74,7 +74,7 @@ module Tests
 	end
 	module_function :score_garden
 	
-	def setup_game
+	def setup_game_manually
 		
 		game = DominionGame.new([Supply.new(Province,1)],
 				[Player.new("One",
@@ -88,11 +88,21 @@ module Tests
 				] #phases are default
 			)
 		
-		game.players.each{|p| p.draw}
-		:unimplemented
-		#true
+		game.players.each{|p| 
+			p.shuffle_deck
+			p.draw
+		}
+		game.players.each{|p| 
+			puts p.hand
+			puts
+		}
+		game.players.each{|p|
+			if(p.hand.size != 5) or (p.deck.size != 5) then return false end
+		}
+		true
+		#note: inspect hands to see if shuffling is occurring
 	end
-	module_function :setup_game
+	module_function :setup_game_manually
 	
 	def play_treasure
 		#TODO

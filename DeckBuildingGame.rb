@@ -164,6 +164,10 @@ class Player
 	end
 	
 	
+	def shuffle_deck
+		shuffle(@deck)
+	end
+	
 	def shuffle_discard
 		@deck.concat(@discard_pile.pop(@discard_pile.length))
 		shuffle(@deck)

@@ -107,17 +107,18 @@ module Tests
 	end
 	module_function :dominion_initializer
 	
-	def setup_game
-		#game = DominionGame.new
-		#game.setup
-		
-		:unimplemented
+	def setup_default_game
+		game = DominionGame.new
+		game.set_up #should test using this function in other cases
+		game
 	end
-	module_function :setup_game
+	module_function :setup_default_game
 	
 	def play_treasure
+		game = DominionGame.new
+		game.set_up
 		
-	
+		
 		#TODO
 		:unimplemented
 	end

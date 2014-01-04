@@ -44,6 +44,20 @@ class DominionGame < Game
 			
 		super(supplies, players, phases)
 	end
+	
+	#set up the game
+	def set_up
+		#TODO: check setup conditions on supply cards and game options
+		#TODO: decide on when it is appropriate to call this or add checks.
+		#	Should this be like reset?
+		
+		#[f:signals to do this in parallel]
+		@players.each{|p|
+			#p.discard_hand
+			p.shuffle_deck
+			p.draw
+		}
+	end
 
 	def over?
 		empty_count = 0

@@ -174,6 +174,16 @@ class Player
 		nil
 	end
 	
+	def discard()
+		#TODO
+		:unimplemented
+	end
+	
+	def discard_hand
+		@discard_pile.concat(@hand)
+		@hand = []
+	end
+	
 	
 	#discard everything; draw new hand
 	#NOTE: it is game's responsibility to check for triggers beforehand
